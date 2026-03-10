@@ -23,9 +23,11 @@
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+
 <link rel="stylesheet" href="./adminlte.min.css" />
 
-<script src="./plugins/select2/js/select2.full.min.js"></script>
+
 <style>
   .dt-search {
     display: none;
@@ -337,13 +339,13 @@
                   <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
                     <i class="fas fa-tag text-slate-400 text-sm"></i>
                   </span>
-                  <input type="text" placeholder="e.g. SMART WATCH ACCESSORIES" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                  <input id="goodsName" type="text"   placeholder="e.g. SMART WATCH ACCESSORIES" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
                 </div>
               </div>
               <!-- Chinese Name -->
               <div>
                 <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Chinese Name</label>
-                <input type="text" placeholder="中文名称" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                <input id="chineseName" type="text" placeholder="中文名称" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
               </div>
               <!-- Quantity & Unit -->
               <div class="grid grid-cols-2 gap-3">
@@ -353,15 +355,14 @@
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
                       <i class="fas fa-hashtag text-slate-400 text-sm"></i>
                     </span>
-                    <input type="text" placeholder="e.g. 200" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                    <input id="quantity" type="number" placeholder="e.g. 200" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
                   </div>
                 </div>
                 <div>
                   <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Unit</label>
-                  <select class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800">
-                    <option selected>PCS</option>
-                    
-                  </select>
+                  <input id="unit" type="text" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800">
+                   
+                  </>
                 </div>
               </div>
             </div>
@@ -381,7 +382,7 @@
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
                       <i class="fas fa-weight-hanging text-slate-400 text-sm"></i>
                     </span>
-                    <input type="number" step="0.01" placeholder="0.00" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                    <input id="weight"  type="number" step="0.01" placeholder="0.00" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
                   </div>
                 </div>
                 <div>
@@ -390,7 +391,7 @@
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
                       <i class="fas fa-weight-hanging text-slate-400 text-sm"></i>
                     </span>
-                    <input type="number" step="0.01" placeholder="0.00" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                    <input id="netWeight" type="number" step="0.01" placeholder="0.00" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
                   </div>
                 </div>
                 <div>
@@ -399,7 +400,7 @@
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
                       <i class="fas fa-chart-bar text-slate-400 text-sm"></i>
                     </span>
-                    <input type="number" step="0.001" placeholder="0.000" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                    <input id="cbm" type="number" step="0.001" placeholder="0.000" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
                   </div>
                 </div>
               </div>
@@ -418,7 +419,7 @@
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
                   <i class="fas fa-truck text-slate-400 text-sm"></i>
                 </span>
-                <input type="text" placeholder="e.g. 16826430077" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                <input   id="expressNumber" type="text" placeholder="e.g. 16826430077" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
               </div>
             </div>
           </div>
@@ -430,17 +431,17 @@
               <span class="text-[11px] font-bold text-slate-50 uppercase tracking-widest">Shipment Status</span>
             </div>
             <div class="px-4 py-3 bg-white">
-              <div class="flex flex-wrap justify-center gap-3">
-                <button type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50">
+              <div    class="flex flex-wrap justify-center gap-3">
+                <button value="PENDING" type="button" class="status-btn inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50">
                   <i class="fas fa-clock text-sm"></i> Pending
                 </button>
-                <button type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50">
+                <button value="SHIPPED" type="button"  class="status-btn inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50">
                   <i class="fas fa-shipping-fast text-sm"></i> Shipped
                 </button>
-                <button type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50">
+                <button value="DELIVERED" type="button" class="status-btn inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50">
                   <i class="fas fa-check-circle text-sm"></i> Delivered
                 </button>
-                <button type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-rose-500 hover:border-slate-300 hover:bg-rose-50">
+                <button value="DAMAGED" type="button" class="status-btn inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-rose-500 hover:border-slate-300 hover:bg-rose-50">
                   <i class="fas fa-exclamation-triangle text-sm"></i> Damaged
                 </button>
               </div>
@@ -480,6 +481,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="./plugins/alertify/lib/alertify.min.js"></script>
+<script src="./plugins/select2/js/select2.full.min.js"></script>
+
 <!-- Development version -->
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
@@ -557,15 +560,15 @@
       ],
 
       columns: [
-        {
-          title: `<input type="checkbox" id="selectAll">`,
-          data: null,
-          orderable: false,
-          className: "select-checkbox text-center",
-          render: (data, type, row, meta) => {
-            return `<input type="checkbox" class="row-select" data-id="${row.cpid}">`;
-          },
-        },
+       {
+    title: `<input type="checkbox" id="selectAll">`,
+    data: null,
+    orderable: false,
+    className: "text-center", // remove select-checkbox
+    render: (data, type, row, meta) => {
+        return `<input type="checkbox" class="row-select" data-id="${row.cpid}">`;
+    },
+},
         {
           data: "shipment",
           title: "Shipment",
@@ -583,12 +586,12 @@
               `,
         },
         { data: "ctnNo", title: "CTN No." },
-        { data: "goodsName", title: "Goods Name" },
+        { data: "goodsName", title: "Goods Name"},
         { data: "chineseName", title: "Chinese Name" },
         { data: "goodsQty", title: "Qty" },
         { data: "goodsUnit", title: "Unit" },
         { data: "weight", title: "G Weight" },
-        { data: "netWeight", title: "Net Weight" },
+        { data: "netWeight", title: "Net Weight", className:'netWeight' },
         { data: "expressNo", title: "Express No" },
         { data: "cbm", title: "CBM" },
         { data: "invoice", title: "Invoice" },
@@ -642,23 +645,162 @@
       dataTable.draw();
     });
 
-    // Action Events
-   $(document).on("click", ".editBtn", function () {
-    let id = $(this).data("id");
 
-    // alert("Edit ID: " + id);
-    $("#editModal").removeClass("hidden").addClass("flex");
-    
+/*------------------------------------------*/
+/*       Edit Action Events start           */
+/*------------------------------------------*/
+
+// Active class for status buttons
+const activeClass = 'bg-amber-50 border-amber-400 text-amber-700 ring-2 ring-offset-2 scale-[1.03]';
+
+// Store current editing row data
+let currentRowData = null;
+
+// Open modal and populate fields
+$(document).on('click', '.editBtn', function() {
+    const row = dataTable.row($(this).closest('tr'));
+    row.node().classList.add('selected-row'); // mark row
+    const rowData = row.data();
+    currentRowData = rowData; // store current row
+
+    // Populate form fields
+    $('#goodsName').val(rowData.goodsName);
+    $('#chineseName').val(rowData.chineseName);
+    $('#quantity').val(rowData.goodsQty);
+    $('#unit').val(rowData.goodsUnit);
+    $('#weight').val(rowData.weight);
+    $('#netWeight').val(rowData.netWeight);
+    $('#cbm').val(rowData.cbm);
+    $('#expressNumber').val(rowData.expressNo);
+    $('#statusValue').val(rowData.status);
+
+    // Remove previous active classes and highlight current status
+    $('#editModal .status-btn').removeClass(activeClass);
+    $(`#editModal .status-btn[value="${rowData.status}"]`).addClass(activeClass);
+
+    // Show modal
+    $('#editModal').removeClass('hidden').addClass('flex');
 });
 
-   $(document).on("click", "#closeModalBtn", function () {
-    let id = $(this).data("id");
-
-    // alert("Edit ID: " + id);
-     $("#editModal").addClass("hidden").removeClass("flex");
-    
+// Handle status button clicks (only once)
+$(document).on('click', '#editModal .status-btn', function() {
+    $('#editModal .status-btn').removeClass(activeClass);
+    $(this).addClass(activeClass);
+    $('#statusValue').val($(this).val());
 });
 
+// Close modal button
+$(document).on('click', '#closeModalBtn', function() {
+    $('#editModal').addClass('hidden').removeClass('flex');
+    $('.selected-row').removeClass('selected-row'); // remove highlight
+});
+
+// Close modal when clicking overlay
+$(document).on('click', '#editModal', function(e) {
+    if ($(e.target).is('#editModal')) {
+        $('#editModal').addClass('hidden').removeClass('flex');
+        $('.selected-row').removeClass('selected-row'); // remove highlight
+    }
+});
+
+// Form submission
+$(document).on('submit', '#edit-modal-form', function(e) {
+    e.preventDefault(); // prevent page reload
+
+    if (!currentRowData) return; // safety check
+
+    const id = currentRowData.id; // get current row ID
+
+    // Gather form data
+    const formData = {
+        goodsName: $('#goodsName').val(),
+        chineseName: $('#chineseName').val(),
+        goodsQty: $('#quantity').val(),
+        goodsUnit: $('#unit').val(),
+        weight: $('#weight').val(),
+        netWeight: $('#netWeight').val(),
+        cbm: $('#cbm').val(),
+        expressNo: $('#expressNumber').val(),
+        status: $('#statusValue').val()
+    };
+
+    console.log('Submitting:', formData);
+
+    // AJAX request
+    $.ajax({
+        url: `URL/${id}`,  // your API endpoint
+        method: 'PUT',
+        data: formData,
+        success: function(response) {
+            // Update DataTable row dynamically
+            dataTable.row('.selected-row').data(response).draw(false);
+
+            // Close modal
+            $('#editModal').addClass('hidden').removeClass('flex');
+
+            // Remove selected class
+            $('.selected-row').removeClass('selected-row');
+
+            alertify.success('Changes saved successfully!');
+        },
+        error: function(xhr) {
+           alertify.success('Failed to save changes.'); // popup 
+        }
+    });
+});
+
+/*------------------------------------------*/
+/*       Edit Action Events end             */
+/*------------------------------------------*/
+
+/*------------------------------------------*/
+/*       X-Editable Action Events start     */
+/*------------------------------------------*/
+
+$('#incomingTable').on('dblclick', 'td.netWeight', function() {
+  const $td = $(this);
+  const oldVal = $td.text();
+  $td.html(`<input type="number" class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" value="${oldVal}" />`);
+  const $input = $td.find('input');
+  $input.focus();
+
+  $input.on('blur keydown', function(e) {
+    if(e.type === 'blur' || e.key === 'Enter') {
+      const newVal = $input.val();
+      $td.text(newVal); // replace input with value
+
+      // Update DataTable row
+      const row = dataTable.row($td.closest('tr'));
+      const rowData = row.data();
+      rowData.netWeight = newVal;
+      row.data(rowData).draw(false);
+
+      // Optional: AJAX to backend
+      $.ajax({
+        url: `/api/warehouse/${rowData.id}`,
+        method: 'PUT',
+        data: { netWeight: newVal }
+      });
+    }
+  });
+});
+/*------------------------------------------*/
+/*       X-Editable Action Events end       */
+/*------------------------------------------*/
+/*------------------------------------------*/
+/*       Select All Action Events start     */
+/*------------------------------------------*/
+// Header "Select All" checkbox
+$('#incomingTable').on('change', '#selectAll', function() {
+    const checked = this.checked;
+    $('#incomingTable .row-select').each(function() {
+        $(this).prop('checked', checked).trigger('change');
+    });
+});
+
+/*------------------------------------------*/
+/*       Select All Action Events end       */
+/*------------------------------------------*/
     $(document).on("click", ".deleteBtn", function () {
       let id = $(this).data("id");
       deleteData(id);
