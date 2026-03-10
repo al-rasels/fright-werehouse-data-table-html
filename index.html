@@ -79,22 +79,7 @@
           </div>
         </div>
 
-        <!-- Right section with stats counters -->
-        <div class="flex items-center gap-2 text-sm">
-          <!-- Total records counter -->
-          <div
-            class="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2 text-center min-w-[72px] border border-white/20">
-            <p class="font-bold m-0 text-white text-base leading-none">156</p>
-            <p class="text-white/60 text-[11px] mt-0.5 m-0">Records</p>
-          </div>
-
-          <!-- Selected rows counter - will be shown/hidden based on data -->
-          <div
-            class="bg-blue-500/20 backdrop-blur-sm border border-blue-300/30 rounded-xl px-4 py-2.5 text-center min-w-[72px]">
-            <p class="font-bold text-white text-md leading-none m-0">12</p>
-            <p class="text-white/70 text-[11px] mt-0.5 m-0">Selected</p>
-          </div>
-        </div>
+        
       </div>
     </div>
     <!-- Header top end  -->
@@ -256,34 +241,230 @@
       </div>
     </div>
   </div>
-  <div
-    id="editModal"
-    class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/60 backdrop-blur-sm p-2 sm:p-4">
-    <div
-      class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col modal-content">
-      <div class="p-6 border-b border-gray-100">
-        <h2 class="text-xl font-bold text-gray-800">✏️ Edit Entry Info</h2>
-      </div>
-      <div class="p-6 overflow-y-auto">
-        <form
-          id="editForm"
-          class="grid grid-cols-1 sm:grid-cols-2 gap-4"></form>
-      </div>
-      <div class="p-6 border-t border-gray-100 flex justify-end gap-3">
-        <button
-          type="button"
-          onclick="closeModal()"
-          class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">
-          Cancel
-        </button>
-        <button
-          type="button"
-          onclick="saveEdit()"
-          class="px-6 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-bold shadow-lg shadow-blue-200 transition-all">
-          Update
-        </button>
+
+
+   <!---------------------------------------->
+   <!--        Edit Modal for Row Edit     -->
+   <!---------------------------------------->
+
+
+<!-- Modal backdrop + container -->
+<div id="editModal" class="fixed hidden inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-2 sm:p-4">
+  <!-- Modal card -->
+  <div class="w-full max-w-[680px] bg-white rounded-2xl flex flex-col max-h-[94vh] overflow-hidden pointer-events-auto shadow-2xl">
+    
+    <!-- ── HEADER ── -->
+    <div class="relative flex-shrink-0 overflow-hidden rounded-t-2xl">
+      <div class="bg-indigo-800 px-6 pt-3 pb-3 relative">
+        <!-- subtle grid texture -->
+        <div class="absolute inset-0 opacity-[0.035]" style="background-image: linear-gradient(rgba(255,255,255,1) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px); background-size: 20px 20px;"></div>
+        <!-- teal accent line -->
+        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-teal-400 via-teal-500 to-transparent"></div>
+
+        <div class="relative flex items-center justify-between gap-4">
+          <!-- left: icon + title -->
+          <div class="flex items-center gap-3">
+            <div class="p-2 bg-white/10 backdrop-blur-sm rounded-xl">
+              <i class="fas fa-box text-white text-sm"></i>
+            </div>
+            <h2 class="text-[15px] font-bold text-white tracking-tight leading-none">Edit Record</h2>
+          </div>
+
+          <!-- right: close button -->
+          <button type="button" id="closeModalBtn" class="p-1.5 rounded-lg text-indigo-200 hover:text-white hover:bg-white/10 transition-colors" aria-label="Close modal">
+            <i class="fas fa-times text-sm"></i>
+          </button>
+        </div>
       </div>
     </div>
+
+    <!-- ── SCROLLABLE BODY ── -->
+    <div class="flex-1 overflow-y-auto overscroll-contain">
+      <form id="edit-modal-form" novalidate>
+        <div class="px-6 py-5 space-y-4">
+ <!-- ① Assignment
+            <div class="border-b border-x border-slate-200">
+              <div class="flex items-center gap-2 px-4 py-2 bg-teal-500 bg-opacity-10 rounded-t">
+                <div class="w-1 h-3.5 rounded-full bg-teal-500"></div>
+                <span class="text-[11px] font-bold text-slate-600 uppercase tracking-widest">Assignment</span>
+              </div>
+              <div class="px-4 py-3 bg-white">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <!-- client --
+                  <div>
+                    <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Client <span class="ml-1 text-rose-500">*</span></label>
+                    <div class="relative">
+                      <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                        <i class="fas fa-user text-slate-400 text-sm"></i> 
+                      </span>
+                      <select class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm appearance-none bg-white focus:outline-none focus:ring-1 focus:ring-indigo-800">
+                        <option value="">— Select Client —</option>
+                        <option value="Client A" selected >Client A</option>
+                        <option value="Client B">Client B</option>
+                        <option value="Client C">Client C</option>
+                      </select>
+                    </div>
+                    <div class="text-rose-500 text-[11px] mt-1 hidden">Error message</div>
+                  </div>
+                  <!-- shipment --
+                  <div>
+                    <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Shipment <span class="ml-1 text-rose-500">*</span></label>
+                    <div class="relative">
+                      <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                        <i class="fas fa-truck text-slate-400 text-sm"></i> 
+                      </span>
+                      <select class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm appearance-none bg-white focus:outline-none focus:ring-1 focus:ring-indigo-800">
+                        <option value="">— Select Shipment —</option>
+                        <option value="SHIP001" selected>SHIP001 - Express</option>
+                        <option value="SHIP002">SHIP002 - Sea</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          <!-- Goods Information -->
+          <div class="border-b border-x border-slate-200">
+            <div class="flex items-center gap-2 px-4 py-2 bg-violet-500 rounded-t">
+              <div class="w-1 h-3.5 rounded-full bg-violet-200"></div>
+              <span class="text-[11px] font-bold text-slate-50 uppercase tracking-widest">Goods Information</span>
+            </div>
+            <div class="px-4 py-3 bg-white space-y-3">
+              <!-- Goods Name -->
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Goods Name <span class="ml-1 text-rose-500">*</span></label>
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                    <i class="fas fa-tag text-slate-400 text-sm"></i>
+                  </span>
+                  <input type="text" placeholder="e.g. SMART WATCH ACCESSORIES" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                </div>
+              </div>
+              <!-- Chinese Name -->
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Chinese Name</label>
+                <input type="text" placeholder="中文名称" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+              </div>
+              <!-- Quantity & Unit -->
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Quantity</label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                      <i class="fas fa-hashtag text-slate-400 text-sm"></i>
+                    </span>
+                    <input type="text" placeholder="e.g. 200" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Unit</label>
+                  <select class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800">
+                    <option selected>PCS</option>
+                    
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weight & Dimensions -->
+          <div class="border-b border-x border-slate-200">
+            <div class="flex items-center gap-2 px-4 py-2 bg-cyan-500 rounded-t">
+              <div class="w-1 h-3.5 rounded-full bg-cyan-200"></div>
+              <span class="text-[11px] font-bold text-slate-50 uppercase tracking-widest">Weight & Dimensions</span>
+            </div>
+            <div class="px-4 py-3 bg-white">
+              <div class="grid grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Gross (kg)</label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                      <i class="fas fa-weight-hanging text-slate-400 text-sm"></i>
+                    </span>
+                    <input type="number" step="0.01" placeholder="0.00" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Net (kg)</label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                      <i class="fas fa-weight-hanging text-slate-400 text-sm"></i>
+                    </span>
+                    <input type="number" step="0.01" placeholder="0.00" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">CBM (m³)</label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                      <i class="fas fa-chart-bar text-slate-400 text-sm"></i>
+                    </span>
+                    <input type="number" step="0.001" placeholder="0.000" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logistics -->
+          <div class="border-b border-x border-slate-200">
+            <div class="flex items-center gap-2 px-4 py-2 bg-emerald-500 rounded-t">
+              <div class="w-1 h-3.5 rounded-full bg-emerald-200"></div>
+              <span class="text-[11px] font-bold text-slate-50 uppercase tracking-widest">Logistics</span>
+            </div>
+            <div class="px-4 py-3 bg-white">
+              <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Express / Tracking Number</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                  <i class="fas fa-truck text-slate-400 text-sm"></i>
+                </span>
+                <input type="text" placeholder="e.g. 16826430077" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-800" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Shipment Status -->
+          <div class="border-b border-x border-slate-200">
+            <div class="flex items-center gap-2 px-4 py-2 bg-amber-500 rounded-t">
+              <div class="w-1 h-3.5 rounded-full bg-amber-500"></div>
+              <span class="text-[11px] font-bold text-slate-50 uppercase tracking-widest">Shipment Status</span>
+            </div>
+            <div class="px-4 py-3 bg-white">
+              <div class="flex flex-wrap justify-center gap-3">
+                <button type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50">
+                  <i class="fas fa-clock text-sm"></i> Pending
+                </button>
+                <button type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50">
+                  <i class="fas fa-shipping-fast text-sm"></i> Shipped
+                </button>
+                <button type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50">
+                  <i class="fas fa-check-circle text-sm"></i> Delivered
+                </button>
+                <button type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold border-2 transition-all duration-150 bg-white border-slate-200 text-rose-500 hover:border-slate-300 hover:bg-rose-50">
+                  <i class="fas fa-exclamation-triangle text-sm"></i> Damaged
+                </button>
+              </div>
+              <input type="hidden" id="statusValue">
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <div class="flex-shrink-0 px-6 py-4 border-t border-slate-200 bg-slate-50/70 rounded-b-2xl flex items-center justify-end gap-3">
+      <button type="button" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-xs font-bold hover:bg-white hover:border-slate-300 transition-all">Cancel</button>
+      <button type="submit" form="edit-modal-form" class="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-indigo-800 text-white text-xs font-bold hover:bg-indigo-700 active:scale-[0.97] transition-all shadow-sm">
+        <i class="fas fa-save text-sm"></i> Save Changes
+      </button>
+    </div>
+
+  </div>
+</div>
+    </div>
+  </div>
+</div>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -462,10 +643,21 @@
     });
 
     // Action Events
-    $(document).on("click", ".editBtn", function () {
-      let id = $(this).data("id");
-      alert("Edit ID: " + id);
-    });
+   $(document).on("click", ".editBtn", function () {
+    let id = $(this).data("id");
+
+    // alert("Edit ID: " + id);
+    $("#editModal").removeClass("hidden").addClass("flex");
+    
+});
+
+   $(document).on("click", "#closeModalBtn", function () {
+    let id = $(this).data("id");
+
+    // alert("Edit ID: " + id);
+     $("#editModal").addClass("hidden").removeClass("flex");
+    
+});
 
     $(document).on("click", ".deleteBtn", function () {
       let id = $(this).data("id");
