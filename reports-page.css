@@ -1,0 +1,98 @@
+/* Updated Header to match the teal/blue gradient of the report section */
+#incomingTable thead th {
+  background: #181a7c !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 1rem 1rem;
+  border: none;
+  white-space: nowrap;
+}
+
+table.dataTable tbody tr.selected > * {
+  background-color: #2563eb !important; /* Blue color */
+  box-shadow: none !important; /* Remove the previous inset shadow */
+  color: #ffffff !important; /* White text color */
+}
+
+table.dataTable tbody tr {
+  font-size: 12px;
+}
+
+table.dataTable thead th:first-child {
+  border-top-left-radius: 0.75rem;
+}
+table.dataTable thead th:last-child {
+  border-top-right-radius: 0.75rem;
+}
+
+.dt-button {
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 600 !important;
+  border: none !important;
+  margin-right: 0.25rem !important;
+}
+
+.dataTables_wrapper {
+  overflow-x: auto;
+}
+
+/* Smooth modal scrolling for small mobile screens */
+#editModal .modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Style for the pagination container */
+.dt-paging {
+  margin-top: 1.5rem !important;
+  padding-top: 1rem;
+  border-top: 1px solid #f3f4f6;
+  display: flex;
+  gap: 0.25rem;
+}
+
+/* Base Style for all pagination buttons */
+.dt-paging-button {
+  border-radius: 0.5rem !important;
+  padding: 0.4rem 0.9rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  border: 1px solid #e5e7eb !important;
+  background: white !important;
+  color: gray !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer;
+}
+
+/* Hover Effect for buttons */
+.dt-paging-button:hover {
+  background-color: #f9fafb !important;
+  border-color: #d1d5db !important;
+  color: #1e3a8a !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Style for the CURRENT/ACTIVE page button */
+.dt-paging-button.current {
+  background: #0c94ca !important; /* Matches your selection blue */
+  color: white !important;
+  border-color: #21a3e4 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Style for Disabled buttons (Previous/Next when at ends) */
+.dt-paging-button.disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  background: #f3f4f6 !important;
+}
+
+/* Remove the default DataTables focus ring */
+.dt-paging-button:focus {
+  outline: none !important;
+  border-color: #3b82f6 !important;
+}
