@@ -23,10 +23,9 @@
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+
 
 <link rel="stylesheet" href="./adminlte.min.css" />
-
 
 <style>
   .dt-search {
@@ -39,7 +38,7 @@
   }
 </style>
 <div class="pt-3">
-  <div class="max-w-[90dvw] mx-auto bg-gray-50">
+  <div class="max-w-[90dvw] mx-auto backdrop-blur-xl bg-white/30 border border-white/20 shadow-xl rounded-2xl p-6 ">
     <!-- Header top start  -->
     <!-- Main container with gradient background and grid texture -->
     <div
@@ -86,7 +85,7 @@
     </div>
     <!-- Header top end  -->
     <div
-      class="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
+      class="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4  md:gap-6">
       <!-- Total Quantity Stats Card  -->
       <div
         class="bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full max-w-sm w-full">
@@ -195,13 +194,12 @@
     </div>
     <div
       class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-md border border-white/20 overflow-hidden">
-      <!-- <div
-        class="h-1 bg-gradient-to-r from-[#0891b2] via-[#008594] to-[#22d3ee]"></div> -->
-      <div class="p-6 boder border-gray-50">
+      
+      <div class="p-6 backdrop-blur-xl bg-white/30 border border-white/20 shadow-xl rounded-2xl p-6">
         <div
           class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
           <div
-            class="bg-blue-50 rounded-xl border border-gray-200 p-3 w-full lg:w-auto">
+            class="bg-blue-50  rounded-xl border border-gray-200 p-3 w-full lg:w-auto">
             <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2">
               <!-- <input type="text" id="searchShipment" placeholder="Shipment"
                 class="search-input px-3 py-2 text-sm rounded border focus:border-blue-400 outline-none" /> -->
@@ -210,22 +208,22 @@
                 type="text"
                 id="searchCustomer"
                 placeholder="Customer Name"
-                class="search-input px-3 py-2 text-sm rounded border focus:border-blue-400 outline-none" />
+                class="search-input px-3 py-2 text-sm rounded-md border focus:border-blue-400 outline-none" />
               <input
                 type="text"
                 id="searchCtn"
                 placeholder="CTN No"
-                class="search-input px-3 py-2 text-sm rounded border focus:border-blue-400 outline-none" />
+                class="search-input px-3 py-2 text-sm rounded-md border focus:border-blue-400 outline-none" />
               <input
                 type="text"
                 id="searchGoods"
                 placeholder="Goods Name"
-                class="search-input px-3 py-2 text-sm rounded border focus:border-blue-400 outline-none" />
+                class="search-input px-3 py-2 text-sm rounded-md border focus:border-blue-400 outline-none" />
               <input
                 type="text"
                 id="searchExpress"
                 placeholder="Express No"
-                class="search-input px-3 py-2 text-sm rounded border focus:border-blue-400 outline-none" />
+                class="search-input px-3 py-2 text-sm rounded-md border focus:border-blue-400 outline-none" />
             </div>
           </div>
           <button
@@ -446,6 +444,7 @@
                 </button>
               </div>
               <input type="hidden" id="statusValue">
+              <input type="hidden" id="idValue">
             </div>
           </div>
 
@@ -480,8 +479,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="./plugins/alertify/lib/alertify.min.js"></script>
 <script src="./plugins/select2/js/select2.full.min.js"></script>
+
 
 <!-- Development version -->
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -507,6 +508,7 @@
         style: "multi",
         selector: "td:not(.no-select)",
       },
+    
       pageLength: 25,
       lengthMenu: [10, 25, 50, 100, 250, 500],
 
@@ -534,70 +536,94 @@
           };
         },
       },
-
       dom: '<"flex flex-wrap justify-between items-center mb-4"lB>rt<"flex justify-end mt-4"p>i',
-      buttons: [
-        {
-          extend: "excel",
-          text: '<i class="fa-solid fa-file-excel"></i> Excel',
-          className: "!bg-emerald-600 !text-white",
-        },
-        {
-          extend: "pdf",
-          text: '<i class="fa-solid fa-file-pdf"></i> PDF',
-          className: "!bg-rose-600 !text-white",
-        },
-        {
-          extend: "print",
-          text: '<i class="fa-solid fa-print"></i> Print',
-          className: "!bg-sky-600 !text-white",
-        },
-        {
-          extend: "colvis",
-          text: '<i class="fa-solid fa-eye"></i> Columns',
-          className: "!bg-purple-600 !text-white",
-        },
-      ],
-
-      columns: [
-       {
-    title: `<input type="checkbox" id="selectAll">`,
-    data: null,
-    orderable: false,
-    className: "text-center", // remove select-checkbox
-    render: (data, type, row, meta) => {
-        return `<input type="checkbox" class="row-select" data-id="${row.cpid}">`;
+      
+buttons: [
+  {
+    text: '<i class="fa-solid fa-check-double mr-2"></i>Select All',
+    action: function () {
+      dataTable.rows({ page: 'current' }).select();
     },
-},
+    className: '!bg-teal-600 hover:!bg-teal-700 !text-white font-medium py-2 px-4 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-300 focus:outline-none transition duration-150 ease-in-out'
+  },
+  {
+    text: '<i class="fa-solid fa-undo mr-2"></i>Unselect All',
+    action: function () {
+      dataTable.rows().deselect();
+    },
+    className: '!bg-gray-500 hover:!bg-gray-600 !text-white font-medium py-2 px-4 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-300 focus:outline-none transition duration-150 ease-in-out'
+  },
+  {
+    extend: 'excel',
+    text: '<i class="fa-solid fa-file-excel mr-2"></i>Excel',
+    className: '!bg-emerald-600 hover:!bg-emerald-700 !text-white font-medium py-2 px-4 rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-300 focus:outline-none transition duration-150 ease-in-out'
+  },
+  {
+    extend: 'pdf',
+    text: '<i class="fa-solid fa-file-pdf mr-2"></i>PDF',
+    className: '!bg-rose-600 hover:!bg-rose-700 !text-white font-medium py-2 px-4 rounded-lg shadow-sm focus:ring-2 focus:ring-rose-300 focus:outline-none transition duration-150 ease-in-out'
+  },
+  {
+    extend: 'print',
+    text: '<i class="fa-solid fa-print mr-2"></i>Print',
+    className: '!bg-sky-600 hover:!bg-sky-700 !text-white font-medium py-2 px-4 rounded-lg shadow-sm focus:ring-2 focus:ring-sky-300 focus:outline-none transition duration-150 ease-in-out'
+  },
+  {
+    extend: 'colvis',
+    text: '<i class="fa-solid fa-eye mr-2"></i>Columns',
+    className: '!bg-purple-600 hover:!bg-purple-700 !text-white font-medium py-2 px-4 rounded-lg shadow-sm focus:ring-2 focus:ring-purple-300 focus:outline-none transition duration-150 ease-in-out'
+  }
+],
+      columns: [
+      
+
         {
           data: "shipment",
           title: "Shipment",
           render: (d, t, row) => `
-                <div class="font-bold">${d}</div>
+           <span class="text-md">
+                <div class="font-normal">${d}</div>
                 <small class="text-gray-500">${row.shipmentType}</small>
-              `,
+              </span>`,
         },
         {
           title: "Customer Name",
           data: null,
           render: (row) => `
-                <div class="font-semibold">${row.customerName}</div>
-                <small class="text-gray-500">${row.customerMobile}</small>
+           <span class="text-sm">
+                <div class="font-medium">${row.customerName}</div>
+                <small class="text-gray-500">${row.customerMobile}</small> </span>
               `,
         },
-        { data: "ctnNo", title: "CTN No." },
-        { data: "goodsName", title: "Goods Name"},
-        { data: "chineseName", title: "Chinese Name" },
-        { data: "goodsQty", title: "Qty" },
-        { data: "goodsUnit", title: "Unit" },
-        { data: "weight", title: "G Weight" },
-        { data: "netWeight", title: "Net Weight", className:'netWeight' },
-        { data: "expressNo", title: "Express No" },
-        { data: "cbm", title: "CBM" },
-        { data: "invoice", title: "Invoice" },
+        { data: "ctnNo", title: "CTN No." , },
+        { data: "goodsName", title: "Goods Name" ,},
+        { data: "chineseName", title: "Chinese Name", },
+        { data: "goodsQty", title: "Qty", },
+        { data: "goodsUnit", title: "Unit", },
+        { data: "weight", title: "G Weight" ,},
+        { 
+          data: "netWeight", 
+          title: "Net Weight", 
+          className:"netWeight text-sm",
+           render: (data, type, row, meta) => {
+            // console.log("data:", data);
+            // console.log("type:", type);
+            // console.log("row:", row);
+            // console.log("meta:", meta);
+            return `
+              <span type="number" class="netWeightId" data-id="${row.cpid}">${row.netWeight}</span>
+              `;
+
+          },
+        },
+
+        { data: "expressNo", title: "Express No" , },
+        { data: "cbm", title: "CBM", },
+        { data: "invoice", title: "Invoice", },
         {
           title: "Status",
           data: "status",
+          
           render: (d) => {
             const statusMap = {
               DELIVERED:
@@ -623,7 +649,7 @@
           title: "Action",
           data: null,
           orderable: false,
-          className: "no-select",
+          className: "no-select ",
           render: (data, type, row, meta) => {
             // console.log("data:", data);
             // console.log("type:", type);
@@ -638,6 +664,12 @@
           },
         },
       ],
+      columnDefs: [
+{
+targets: 0,
+orderable: false
+}
+]
     });
 
     /* External search inputs → server-side search */
@@ -673,6 +705,7 @@ $(document).on('click', '.editBtn', function() {
     $('#cbm').val(rowData.cbm);
     $('#expressNumber').val(rowData.expressNo);
     $('#statusValue').val(rowData.status);
+    $('#idValue').val(rowData.cpid);
 
     // Remove previous active classes and highlight current status
     $('#editModal .status-btn').removeClass(activeClass);
@@ -721,7 +754,8 @@ $(document).on('submit', '#edit-modal-form', function(e) {
         netWeight: $('#netWeight').val(),
         cbm: $('#cbm').val(),
         expressNo: $('#expressNumber').val(),
-        status: $('#statusValue').val()
+        status: $('#statusValue').val(),
+        id:$('#idValue').val(),
     };
 
     console.log('Submitting:', formData);
@@ -757,50 +791,61 @@ $(document).on('submit', '#edit-modal-form', function(e) {
 /*       X-Editable Action Events start     */
 /*------------------------------------------*/
 
-$('#incomingTable').on('dblclick', 'td.netWeight', function() {
+
+$('#incomingTable').on('dblclick', 'td.netWeight', function () {
+
   const $td = $(this);
-  const oldVal = $td.text();
-  $td.html(`<input type="number" class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" value="${oldVal}" />`);
+const id=$('.netWeightId').data('id')
+
+  // prevent multiple inputs
+  if ($td.find('input').length) return;
+
+  const row = dataTable.row($td.closest('tr'));
+  const rowData = row.data();
+
+  const rowId = rowData.id;
+  const value = $td.text().trim();
+
+  $td.html(`
+    <input type="number"
+      class="w-full bg-white text-blue-600 border border-gray-300 rounded px-2 py-1 text-sm
+      focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+      value="${value}">
+  `);
+
   const $input = $td.find('input');
-  $input.focus();
+  $input.focus().select();
 
   $input.on('blur keydown', function(e) {
-    if(e.type === 'blur' || e.key === 'Enter') {
-      const newVal = $input.val();
-      $td.text(newVal); // replace input with value
 
-      // Update DataTable row
-      const row = dataTable.row($td.closest('tr'));
-      const rowData = row.data();
+    if (e.key === 'Enter' ) {
+
+      const newVal = $input.val();
+
+      $td.text(newVal);
+
       rowData.netWeight = newVal;
       row.data(rowData).draw(false);
 
-      // Optional: AJAX to backend
       $.ajax({
-        url: `/api/warehouse/${rowData.id}`,
-        method: 'PUT',
-        data: { netWeight: newVal }
+        url: `/api/warehouse/`,
+        method: 'POST',
+        data: {
+          id: id,
+          netWeight: newVal
+        }
       });
+
     }
+
   });
+
 });
 /*------------------------------------------*/
 /*       X-Editable Action Events end       */
 /*------------------------------------------*/
-/*------------------------------------------*/
-/*       Select All Action Events start     */
-/*------------------------------------------*/
-// Header "Select All" checkbox
-$('#incomingTable').on('change', '#selectAll', function() {
-    const checked = this.checked;
-    $('#incomingTable .row-select').each(function() {
-        $(this).prop('checked', checked).trigger('change');
-    });
-});
 
-/*------------------------------------------*/
-/*       Select All Action Events end       */
-/*------------------------------------------*/
+
     $(document).on("click", ".deleteBtn", function () {
       let id = $(this).data("id");
       deleteData(id);
@@ -824,7 +869,7 @@ $('#incomingTable').on('change', '#selectAll', function() {
       if (!rows.every((r) => r.customerName === customerName)) {
         Swal.fire(
           "Error",
-          "Selected rows must have the same Customer Mark.",
+          "Selected rows must have the same Customer Name.",
           "error",
         );
         return;
@@ -922,13 +967,5 @@ $('#incomingTable').on('change', '#selectAll', function() {
     },
   });
 
-  // Header "Select All" checkbox
-  $("#incomingTable").on("click", "#selectAll", function () {
-    const checked = this.checked;
-
-    // Loop over visible rows and update checkboxes
-    $("#incomingTable .row-select").each(function () {
-      $(this).prop("checked", checked).trigger("change");
-    });
-  });
+  
 </script>
